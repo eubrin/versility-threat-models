@@ -1,0 +1,51 @@
+"Theft","Wasserstands-Boje","0,1",5000
+"Theft","Lage-Bake","0,2",500
+"Theft","Kamera-Drohne","0,02",15000
+"Blackout","Zähl-Schiene","0,01",50000
+"Blackout","Weiche","0,01",50000
+"Blackout","Kamera-Ampel","0,2",5000
+"Blackout","Wasserstands-Boje","0,01",1000000
+"Blackout","WLAN-Laterne","0,1",50
+"Blackout","Lage-Bake","0,01",5
+"Blackout","Kamera-Drohne","0,2",15000
+"Blackout","Waage-Straße","0,01",5000000
+"Blackout","Lade-Laterne","0,1",10000
+"Blackout","Zähl-Fahrradweg","0,01",50
+"Blackout","Schalter-Laterne","0,05",50
+"Blackout","Kipp-Brücke","0,01",5000000
+"Blackout","Fluttor","0,01",100000000
+"Blackout","Zeitschalt-Tafeln","0,05",500000
+"Tampering with Data","Zähl-Schiene","0,01",50000
+"Tampering with Data,Weiche","0,01",50000
+"Tampering with Data","Wasserstands-Boje","0,01",1000000
+"Tampering with Data","Lage-Bake","0,01",5
+"Tampering with Data","Waage-Straße","0,01",5000000
+"Tampering with Data","Zähl-Fahrradweg","0,01",50
+"Tampering with Data,Fluttor","0,01",5000000
+"Tampering with Data","Zeitschalt-Tafeln","0,01",100000000
+"Gain Control,Weiche","0,00001",10000000
+"Gain Control","Kamera-Ampel","0,0001",200000
+"Gain Control","WLAN-Laterne","0,005",2000000
+"Gain Control","Kamera-Drohne","0,02",200000
+"Gain Control","Lade-Laterne","0,0001",50000
+"Gain Control","Schalter-Laterne","0,02",200
+"Gain Control","Kipp-Brücke","0,00001",10000000
+"Gain Control,Fluttor","0,00001",100000000
+"Gain Control","Zeitschalt-Tafeln","0,02",100000
+"Information Disclosure","Zähl-Schiene","0,1",100
+"Information Disclosure,Weiche","0,01",100
+"Information Disclosure","Kamera-Ampel","0,001",10000000
+"Information Disclosure","Wasserstands-Boje","0,1",100
+"Information Disclosure","WLAN-Laterne","0,2",1000000
+"Information Disclosure","Lage-Bake","0,1",10
+"Information Disclosure","Kamera-Drohne","0,1",10000000
+"Information Disclosure","Waage-Straße",1,0
+"Information Disclosure","Zähl-Fahrradweg",1,0
+"Information Disclosure","Schalter-Laterne",1,0
+"Information Disclosure","Kipp-Brücke",1,0
+"Information Disclosure,Fluttor",1,0
+"Information Disclosure","Zeitschalt-Tafeln",1,0
+"Elevation of Privilege","Kamera-Ampel","0,01",100000000
+"Elevation of Privilege","WLAN-Laterne","0,01",10000000
+"Elevation of Privilege","Kamera-Drohne","0,01",10000000
+"Elevation of Privilege","Lade-Laterne","0,001",100000000

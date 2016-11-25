@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <title>FOO</title>
+    <script type="text/javascript" src="cytoscape/cytoscape.js"></script>
+    <script type="text/javascript" src="jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      var cy;
+      $(function () {
+        // console.log("Ready!");
+
+        cy = cytoscape({
+          container: $('#renderport'), // container to render in
+          elements: {
+            nodes: [
+              {
+                data: {id: 'layer-cloud', faveShape: 'rectangle', row: 0}, locked: true, classes: 'layer'
+              },
+              {
+                data: {id: 'layer-fog', faveShape: 'rectangle', row: 1}, locked: true, classes: 'layer'
+              },
+              {
+                data: {id: 'layer-bricks', faveShape: 'rectangle', row: 2}, locked: true, classes: 'layer'
+              },
+              {
+                data: {id: 'cloud-a', parent: 'layer-cloud', faveShape: 'rectangle', row: 0, threats: 
+                [
+                    {
+                        "name": "6.C.13 Encryption key is lost",
+                        "probability": 0.5,
+                        "damage": 1.0,
+                    },
+                    {
+                        "name": "6.C.18 Network outage",
+                        "probability": 0.5,
+                        "damage": 0.5,
+                    },
+                ]},
+                classes: 'entity'
+              },
+              {
+                data: {id: 'fog-a', parent: 'layer-fog', faveShape: 'rectangle', row: 1}, classes: 'entity'
+              },
+              {
+                data: {id: 'fog-b', parent: 'layer-fog', faveShape: 'rectangle', row: 1}, classes: 'entity'
+              },
+              {
+                data: {id: 'brick-a', parent: 'layer-bricks', faveShape: 'rectangle', row: 2}, classes: 'entity'
+              },
+              {
+                data: {id: 'brick-b', parent: 'layer-bricks', faveShape: 'rectangle', row: 2}, classes: 'entity'
+              },
+            ],
+            edges: [
+              {
+                data: {id: 'brick-b-fog-b', source: 'brick-b', target: 'fog-b'}
+              },
+              {
+                data: {id: 'brick-a-fog-b', source: 'brick-a', target: 'fog-b'}
+              },
+              {
+                data: {id: 'brick-a-fog-a', source: 'brick-a', target: 'fog-a'}
+              },
+            ],
+          },
+          style: [ // the stylesheet for the graph
+            {
+              selector: 'node',
+              style: {
+                'shape': 'data(faveShape)'
+              }
+            },
+            {
+              selector: 'node.entity',
+              style: {
+                // node color: currently only direct threats, no transitive (TODO)
+                'background-color': function (node) {
+                  // console.dir(node['data']());
+                  if (!('threats' in node['data']())) {
+                    return '#ccc';
+                  }
+                  var highestlvl = 0;
+                  for (idx = 0; idx < node['data']()['threats'].length; ++idx) {
+                      threat = node['data']()['threats'][idx];
+                      threatlvl = Math.sqrt(threat['probability']*threat['probability'] + threat['damage']*threat['damage']);
+                      if (threatlvl > 1) threatlvl = 1
+                      if (threatlvl > highestlvl) highestlvl = threatlvl;
+                  }
+                  rgb = 'rgb(' + Math.floor(255 * highestlvl) + ',0,0)';
+                  return rgb;
+                },
+                'label': 'data(id)',
+                'shape': 'data(faveShape)'
+              }
+            },
+            {
+              selector: 'node.layer',
+              style: {
+                'background-color': '#eee',
+                'label': 'data(id)',
+                'shape': 'data(faveShape)'
+              }
+            },
+            {
+              selector: 'edge',
+              style: {
+                'width': 3,
+                'curve-style': 'bezier',
+                'line-color': '#000',
+                'target-arrow-color': '#000',
+                'target-arrow-shape': 'triangle',
+                'source-arrow-shape': 'circle'
+              }
+            },
+            {
+              selector: 'node.entity:selected',
+              style: {
+                'border-width': 2,
+              }
+            }
+          ],
+          layout: {
+            // name: 'preset'
+            name: 'grid',
+            rows: 3,
+            columns: 10,
+            position: function(node) {
+              return {row: node.data()['row']};
+            },
+            avoidOverlap: true,
+          }
+        });
+
+
+      var collection = cy.collection();
+      cy.nodes(".entity").on("click", function(){
+        console.dir(this.id());
+        $('#submenu .obj').html(this.id());  // set submenu title
+        // cy.$(':selected').unselect(); // remove selection
+        cy.nodes('#'+this.id()).outgoers().select();
+        // cy.$(this).select();
+        console.dir(this.outgoers());
+      });
+
+      });
+
+
+
+
+    </script>
+    <style type="text/css">
+      #renderport {
+        width: 90%;
+        height: 99%;
+        display: block;
+        float: left;
+      }
+      #submenu {
+        width: 10%;
+        height: 99%;
+        display: block;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="renderport"></div>
+    <div id="submenu">Submenu for <span class="obj"></span></div>
+  </body>
+</html>
